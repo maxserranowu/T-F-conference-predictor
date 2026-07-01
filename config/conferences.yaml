@@ -1,0 +1,55 @@
+# Conference registry. Every module reads this file; nothing is hard-coded.
+# league_id values are the real TFRRS /leagues/{id}.html identifiers.
+# team slugs are the real /teams/tf/{slug}.html path fragments.
+#
+# NOTE ON MEMBERSHIP: TFRRS's /leagues page shows CURRENT members. The ingester
+# also reads each historical meet's actual scoring teams, so realignment (e.g.
+# California/Stanford/SMU joining the ACC in 2024) is handled from the meet data
+# itself — this list is only the seed for team-page crawling.
+
+http:
+  user_agent: "ACC-Ivy-Predictor/1.0 (research; contact: you@example.edu)"
+  min_interval_seconds: 3.0
+  jitter_seconds: 1.5
+  cache_dir: ".httpcache"
+  max_retries: 4
+  timeout_seconds: 30
+
+conferences:
+  acc:
+    display_name: "ACC"
+    league_id: 62
+    champ_meet_keywords: ["ACC Outdoor", "ACC Indoor", "ACC Cross Country", "ACC XC"]
+    teams:
+      - {name: "Boston College",  slug_m: "MA_college_m_Boston_College",     slug_f: "MA_college_f_Boston_College"}
+      - {name: "California",      slug_m: "CA_college_m_California_CA",       slug_f: "CA_college_f_California_CA"}
+      - {name: "Clemson",         slug_m: "SC_college_m_Clemson",            slug_f: "SC_college_f_Clemson"}
+      - {name: "Duke",            slug_m: "NC_college_m_Duke",               slug_f: "NC_college_f_Duke"}
+      - {name: "Florida State",   slug_m: "FL_college_m_Florida_State",      slug_f: "FL_college_f_Florida_State"}
+      - {name: "Georgia Tech",    slug_m: "GA_college_m_Georgia_Tech",       slug_f: "GA_college_f_Georgia_Tech"}
+      - {name: "Louisville",      slug_m: "KY_college_m_Louisville",         slug_f: "KY_college_f_Louisville"}
+      - {name: "Miami (Fla.)",    slug_m: "FL_college_m_Miami_FL",           slug_f: "FL_college_f_Miami_FL"}
+      - {name: "NC State",        slug_m: "NC_college_m_North_Carolina_St",  slug_f: "NC_college_f_North_Carolina_St"}
+      - {name: "North Carolina",  slug_m: "NC_college_m_North_Carolina",     slug_f: "NC_college_f_North_Carolina"}
+      - {name: "Notre Dame",      slug_m: "IN_college_m_Notre_Dame_IN",      slug_f: "IN_college_f_Notre_Dame_IN"}
+      - {name: "Pittsburgh",      slug_m: "PA_college_m_Pittsburgh",         slug_f: "PA_college_f_Pittsburgh"}
+      - {name: "SMU",             slug_m: "TX_college_m_SMU",                slug_f: "TX_college_f_SMU"}
+      - {name: "Stanford",        slug_m: "CA_college_m_Stanford",           slug_f: "CA_college_f_Stanford"}
+      - {name: "Syracuse",        slug_m: "NY_college_m_Syracuse",           slug_f: "NY_college_f_Syracuse"}
+      - {name: "Virginia",        slug_m: "VA_college_m_Virginia",           slug_f: "VA_college_f_Virginia"}
+      - {name: "Virginia Tech",   slug_m: "VA_college_m_Virginia_Tech",      slug_f: "VA_college_f_Virginia_Tech"}
+      - {name: "Wake Forest",     slug_m: "NC_college_m_Wake_Forest",        slug_f: "NC_college_f_Wake_Forest"}
+
+  ivy:
+    display_name: "Ivy League"
+    league_id: 55
+    champ_meet_keywords: ["Ivy League Heptagonal", "Ivy League Outdoor", "Ivy League Indoor", "Heps", "Ivy League Cross Country"]
+    teams:
+      - {name: "Brown",       slug_m: "RI_college_m_Brown",        slug_f: "RI_college_f_Brown"}
+      - {name: "Columbia",    slug_m: "NY_college_m_Columbia",     slug_f: "NY_college_f_Columbia"}
+      - {name: "Cornell",     slug_m: "NY_college_m_Cornell",      slug_f: "NY_college_f_Cornell"}
+      - {name: "Dartmouth",   slug_m: "NH_college_m_Dartmouth",    slug_f: "NH_college_f_Dartmouth"}
+      - {name: "Harvard",     slug_m: "MA_college_m_Harvard",      slug_f: "MA_college_f_Harvard"}
+      - {name: "Penn",        slug_m: "PA_college_m_Pennsylvania", slug_f: "PA_college_f_Pennsylvania"}
+      - {name: "Princeton",   slug_m: "NJ_college_m_Princeton",    slug_f: "NJ_college_f_Princeton"}
+      - {name: "Yale",        slug_m: "CT_college_m_Yale",         slug_f: "CT_college_f_Yale"}

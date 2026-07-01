@@ -1,0 +1,64 @@
+# Scoring tables (place -> points) and event-group taxonomy.
+# Conference championships commonly use these; override per-conference/season if
+# the meet's actual table differs (the ingester also stores observed points, so
+# projections can be calibrated against reality).
+
+scoring_tables:
+  # Individual track/field events, final (championship) sections.
+  track_field_top8:   {1: 10, 2: 8, 3: 6, 4: 5, 5: 4, 6: 3, 7: 2, 8: 1}
+  # Some conferences score 16 deep in relays / all events:
+  track_field_top16:  {1: 10, 2: 8, 3: 6, 4: 5, 5: 4, 6: 3, 7: 2, 8: 1,
+                       9: 0.5}   # 9+ often 0; kept explicit for override
+  # Relays typically double points:
+  relay_top8:         {1: 10, 2: 8, 3: 6, 4: 5, 5: 4, 6: 3, 7: 2, 8: 1}
+  # Cross country: low score wins; scoring is placement-summed, top 5 score,
+  # 6-7 displace. Handled specially in scoring.py (not a points table).
+  xc_scoring: {scorers: 5, displacers: 2}
+
+default_table_by_sport:
+  indoor:  track_field_top8
+  outdoor: track_field_top8
+  xc:      xc_scoring
+
+# Canonical event -> group. Raw TFRRS event strings are normalized first
+# (see event_groups.py::normalize_event) then mapped here.
+event_groups:
+  sprints:
+    - "60m"
+    - "100m"
+    - "200m"
+    - "400m"
+    - "60m Hurdles"
+    - "100m Hurdles"
+    - "110m Hurdles"
+    - "400m Hurdles"
+    - "4x100 Relay"
+    - "4x400 Relay"
+  distance:
+    - "800m"
+    - "1000m"
+    - "1500m"
+    - "Mile"
+    - "3000m"
+    - "3000m Steeplechase"
+    - "5000m"
+    - "10000m"
+    - "Distance Medley Relay"
+    - "XC 6k"
+    - "XC 8k"
+    - "XC 10k"
+  jumps:
+    - "High Jump"
+    - "Pole Vault"
+    - "Long Jump"
+    - "Triple Jump"
+  throws:
+    - "Shot Put"
+    - "Weight Throw"
+    - "Discus"
+    - "Hammer"
+    - "Javelin"
+  multis:
+    - "Heptathlon"
+    - "Pentathlon"
+    - "Decathlon"
